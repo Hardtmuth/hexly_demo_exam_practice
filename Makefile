@@ -13,3 +13,7 @@ edit-env:
 start-db:
 	cd "${DOCKER_DIR}" && \
 	sudo docker compose up -d
+
+stop-db:
+	cd "${DOCKER_DIR}" && \
+	sudo docker compose down
