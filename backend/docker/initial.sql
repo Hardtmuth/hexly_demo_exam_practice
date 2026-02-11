@@ -5,23 +5,35 @@ DROP TABLE IF EXIST colors;
 DROP TABLE IF EXIST stock;
 
 CREATE TABLE sizes (
-    id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    size_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     size_value DECIMAL(4,1) NOT NULL,
 );
 
-CREATE TABLE models (
-    model_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    article VARCHAR(20) UNIQUE NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    brand VARCHAR(50),
-    color VARCHAR(30)
+CREATE TABLE brands (
+    brand_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    brand_name VARCHAR(50) NOT NULL,
+);
+
+CREATE TABLE colors (
+    color_id SERIAL PRIMARY KEY,
+    color_name VARCHAR(50) NOT NULL UNIQUE,
 );
 
 CREATE TABLE models (
     model_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     article VARCHAR(20) UNIQUE NOT NULL,
-    name VARCHAR(100) NOT NULL,
-    brand VARCHAR(50),
+    model_name VARCHAR(100) NOT NULL,
+    brand_id INT NOT NULL REFERENCES brands(brand_id) ON DELETE CASCADE,
+);
+
+CREATE TABLE model_colors (
+    model_id INT NOT NULL REFERENCES models(model_id) ON DELETE CASCADE,
+    color_id INT NOT NULL REFERENCES colors(color_id) ON DELETE CASCADE,
+    is_primary BOOLEAN DEFAULT FALSE,  -- основной цвет модели
+    sort_order INT DEFAULT 0,         -- порядок отображения в галерее цветов
+
+    PRIMARY KEY (model_id, color_id),  -- уникальность пары
+    CONSTRAINT chk_sort_order CHECK (sort_order >= 0)
 );
 
 CREATE TABLE photos (
@@ -36,23 +48,6 @@ CREATE TABLE photos (
     CONSTRAINT uk_model_photo UNIQUE (model_id, image_url),
     CONSTRAINT chk_sort_order CHECK (sort_order >= 0)
 );
-
-CREATE TABLE colors (
-    color_id SERIAL PRIMARY KEY,
-    color_name VARCHAR(50) NOT NULL UNIQUE,
-    hex_code CHAR(7) CHECK (hex_code LIKE '#%')  -- HEX-код цвета (опционально)
-);
-
-CREATE TABLE model_colors (
-    model_id INT NOT NULL REFERENCES models(model_id) ON DELETE CASCADE,
-    color_id INT NOT NULL REFERENCES colors(color_id) ON DELETE CASCADE,
-    is_primary BOOLEAN DEFAULT FALSE,  -- основной цвет модели
-    sort_order INT DEFAULT 0,         -- порядок отображения в галерее цветов
-
-    PRIMARY KEY (model_id, color_id),  -- уникальность пары
-    CONSTRAINT chk_sort_order CHECK (sort_order >= 0)
-);
-
 
 CREATE TABLE stock (
     stock_id SERIAL PRIMARY KEY,
