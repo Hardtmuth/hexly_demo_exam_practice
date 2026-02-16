@@ -79,12 +79,37 @@ VALUES
     (4, 1, FALSE),
     (4, 10, FALSE),
     (4, 3, TRUE),
-    (),
+    (5, 5, FALSE),
+    (5, 1, FALSE),
+    (5, 7, FALSE),
+    (5, 10, FALSE),
+    (5, 13, FALSE),
+    (5, 6, TRUE),
+    (5, 2, FALSE),
+    (6, 10, TRUE),
+    (7, 16, TRUE),
+    (8, 11, FALSE),
+    (8, 8, FALES),
+    (8, 10, FALSE),
+    (8, 13, TRUE),
+    (9, 13, FALES),
+    (9, 8, FALSE),
+    (9, 9, FALSE),
+    (9, 11, FALSE),
+    (9, 14, FALSE),
+    (9, 15, FALSE),
+    (9, 4, FALSE),
+    (9, 3, TRUE),
+    (10, 10, TRUE),
+    (10, 7, FALSE),
+    (11, 6, TRUE),
+    (12, 5, TRUE),
+    (13, 3, FALSE);
 
-INSERT INTO photos (model_id, image_url, is_primary, alt_text)
+INSERT INTO photos (model_id, color_id, image_url, is_primary, alt_text)
 VALUES
-    ();
+    (); -- top, down, left, right, angle, angle-double, back-double, top-double, back-angle-double, angle-close(3), top-down(1), angle1(1), back-angle(1)
 
-INSERT INTO stock (model_id, size_id, color_id, quantity, price)
+INSERT INTO stock (model_id, size_id, color_id, quantity, price) -- check model -> color
 VALUES
     ();

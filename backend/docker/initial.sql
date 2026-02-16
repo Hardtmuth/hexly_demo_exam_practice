@@ -39,13 +39,14 @@ CREATE TABLE model_colors (
 CREATE TABLE photos (
     photo_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     model_id INT NOT NULL REFERENCES models(model_id) ON DELETE CASCADE,
+    color_id INT NOT NULL REFERENCES colors(color_id) ON DELETE CASCADE,
     image_url VARCHAR(500) NOT NULL,
     is_primary BOOLEAN DEFAULT FALSE,
     sort_order INT DEFAULT 0,
     alt_text VARCHAR(200),
     created_at TIMESTAMP DEFAULT NOW(),
 
-    CONSTRAINT uk_model_photo UNIQUE (model_id, image_url),
+    CONSTRAINT uk_model_photo UNIQUE (model_id, color_id, image_url),
     CONSTRAINT chk_sort_order CHECK (sort_order >= 0)
 );
 
