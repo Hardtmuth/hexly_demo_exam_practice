@@ -1,29 +1,29 @@
-DROP TABLE IF EXIST sizes;
-DROP TABLE IF EXIST models;
-DROP TABLE IF EXIST photos;
-DROP TABLE IF EXIST colors;
-DROP TABLE IF EXIST stock;
+DROP TABLE IF EXISTS sizes;
+DROP TABLE IF EXISTS models;
+DROP TABLE IF EXISTS photos;
+DROP TABLE IF EXISTS colors;
+DROP TABLE IF EXISTS stock;
 
 CREATE TABLE sizes (
-    size_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    size_value DECIMAL(4,1) NOT NULL,
+    size_id SERIAL PRIMARY KEY,
+    size_value DECIMAL(4,1) NOT NULL
 );
 
 CREATE TABLE brands (
-    brand_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    brand_name VARCHAR(50) NOT NULL,
+    brand_id SERIAL PRIMARY KEY,
+    brand_name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE colors (
     color_id SERIAL PRIMARY KEY,
-    color_name VARCHAR(50) NOT NULL UNIQUE,
+    color_name VARCHAR(50) NOT NULL UNIQUE
 );
 
 CREATE TABLE models (
-    model_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    model_id SERIAL PRIMARY KEY,
     article VARCHAR(20) UNIQUE NOT NULL,
     model_name VARCHAR(100) NOT NULL,
-    brand_id INT NOT NULL REFERENCES brands(brand_id) ON DELETE CASCADE,
+    brand_id INT NOT NULL REFERENCES brands(brand_id) ON DELETE CASCADE
 );
 
 CREATE TABLE model_colors (
@@ -37,7 +37,7 @@ CREATE TABLE model_colors (
 );
 
 CREATE TABLE photos (
-    photo_id SERIAL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    photo_id SERIAL PRIMARY KEY,
     model_id INT NOT NULL REFERENCES models(model_id) ON DELETE CASCADE,
     color_id INT NOT NULL REFERENCES colors(color_id) ON DELETE CASCADE,
     image_url VARCHAR(500) NOT NULL,

@@ -17,3 +17,7 @@ start-db:
 stop-db:
 	cd "${DOCKER_DIR}" && \
 	sudo docker compose down
+
+remove-db-data:
+	cd "${DOCKER_DIR}" && \
+	sudo rm -rf data/
