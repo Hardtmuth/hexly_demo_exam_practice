@@ -21,3 +21,10 @@ stop-db:
 remove-db-data:
 	cd "${DOCKER_DIR}" && \
 	sudo rm -rf data/
+
+start-backend:
+	node backend/server.js
+
+start-frontend:
+	cd frontend && \
+	npx vite

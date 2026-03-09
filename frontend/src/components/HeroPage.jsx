@@ -1,6 +1,6 @@
 import { Button, Container, Group, Text } from '@mantine/core';
 import { GithubIcon } from '@mantinex/dev-icons';
-import classes from './HeroTitle.module.css';
+import classes from '../styles/HeroTitle.module.css';
 
 export const HeroPage = ()  => {
   return (

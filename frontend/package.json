@@ -12,6 +12,8 @@
   "dependencies": {
     "@mantine/core": "^8.3.16",
     "@mantinex/dev-icons": "^2.0.0",
+    "@mantinex/mantine-logo": "^2.0.0",
+    "@tabler/icons-react": "^3.40.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
