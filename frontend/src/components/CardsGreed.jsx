@@ -1,13 +1,19 @@
-import { SimpleGrid, Card, Image, Text, Badge, Button, Group, Pagination, Center } from '@mantine/core'
-import { useEffect } from 'react'
+import { SimpleGrid, Card, Image, Text, Badge, Button, Group, Pagination, Center, Modal, Box } from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks';
 import { cardsData } from './tempData.js'
+import { CardModal } from './CardModal.jsx'
 
 const renderCard = (cardData) => {
+  const [opened, { open, close }] = useDisclosure(false);
   const basePath = new URL('../../img/shoes', import.meta.url).href;
   const imgPath = `${basePath}${cardData.photo}`;
   // console.log(imgPath)
   return (
-    <Card shadow="sm" padding="lg" radius="md" withBorder key={cardData.id}>
+    <Box key={cardData.id}>
+    <Modal opened={opened} onClose={close} title={`${cardData.brand} ${cardData.model}`}>
+      <CardModal cardData={cardData} />
+    </Modal>
+    <Card shadow="sm" padding="lg" radius="md" withBorder onClick={open}>
       <Card.Section>
         <Image
           src={imgPath}
@@ -34,9 +40,9 @@ const renderCard = (cardData) => {
         {cardData.price} р.
       </Button>
     </Card>
+    </Box>
   )
 }
-
 
 const CardsGreed = () => {
   return (
