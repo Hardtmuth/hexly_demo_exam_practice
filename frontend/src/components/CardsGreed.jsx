@@ -1,32 +1,37 @@
-import { SimpleGrid, Card, Image, Text, Badge, Button, Group } from '@mantine/core'
+import { SimpleGrid, Card, Image, Text, Badge, Button, Group, Pagination, Center } from '@mantine/core'
+import { useEffect } from 'react'
 import { cardsData } from './tempData.js'
 
-
 const renderCard = (cardData) => {
+  const basePath = new URL('../../img/shoes', import.meta.url).href;
+  const imgPath = `${basePath}${cardData.photo}`;
+  // console.log(imgPath)
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder key={cardData.id}>
       <Card.Section>
         <Image
-          src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-          height={100}
-          alt="Norway"
+          src={imgPath}
+          height={120}
+          alt={cardData.model}
         />
       </Card.Section>
 
-      <Group justify="space-between" mt="md" mb="xs">
-        <Text fw={500}>{cardData.brand}</Text>
-        <Badge color="pink">On Sale</Badge>
+      <Group justify="space-between" mt="md">
+        <Text fw={500}>{cardData.model}</Text>
+        <Badge color="pink">{cardData.brand}</Badge>
       </Group>
-
+      <Group justify="space-between" >
+        
       <Text size="sm" c="dimmed">
-        {cardData.model}
         {cardData.color}
-        {cardData.size}
-        {cardData.price}
-      </Text>
 
+      </Text>
+      <Text size="sm">
+        {cardData.size}
+      </Text>
+      </Group>
       <Button color="blue" fullWidth mt="md" radius="md">
-        Buy now
+        {cardData.price} р.
       </Button>
     </Card>
   )
@@ -35,9 +40,14 @@ const renderCard = (cardData) => {
 
 const CardsGreed = () => {
   return (
-    <SimpleGrid cols={3} spacing="sm">
+    <>
+    <SimpleGrid cols={3} spacing="sm" mb="xl">
       {cardsData.map(renderCard)}
     </SimpleGrid>
+    <Center>
+      <Pagination total={10} />
+    </Center>
+    </>
   )
 }
 
