@@ -28,6 +28,7 @@ import {
 import { useDisclosure } from '@mantine/hooks'
 import { MantineLogo } from '@mantinex/mantine-logo'
 import classes from '../styles/HeaderMegaMenu.module.css'
+import { useTranslation } from 'react-i18next'
 
 const mockdata = [
   {
@@ -66,6 +67,7 @@ const Header = () => {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false)
   const theme = useMantineTheme()
+  const { t } = useTranslation()
 
   const links = mockdata.map(item => (
     <UnstyledButton className={classes.subLink} key={item.title}>
@@ -93,7 +95,7 @@ const Header = () => {
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="#" className={classes.link}>
-              Home
+              {t('hello')}
             </a>
             <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
               <HoverCard.Target>
