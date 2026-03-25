@@ -6,7 +6,7 @@ import {
   IconCoin,
   IconFingerprint,
   IconNotification,
-} from '@tabler/icons-react';
+} from '@tabler/icons-react'
 import {
   Anchor,
   Box,
@@ -24,10 +24,10 @@ import {
   ThemeIcon,
   UnstyledButton,
   useMantineTheme,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { MantineLogo } from '@mantinex/mantine-logo';
-import classes from '../styles/HeaderMegaMenu.module.css';
+} from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import { MantineLogo } from '@mantinex/mantine-logo'
+import classes from '../styles/HeaderMegaMenu.module.css'
 
 const mockdata = [
   {
@@ -60,14 +60,14 @@ const mockdata = [
     title: 'Notifications',
     description: 'Combusken battles with the intensely hot flames it spews',
   },
-];
+]
 
 const Header = () => {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
-  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
-  const theme = useMantineTheme();
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false)
+  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false)
+  const theme = useMantineTheme()
 
-  const links = mockdata.map((item) => (
+  const links = mockdata.map(item => (
     <UnstyledButton className={classes.subLink} key={item.title}>
       <Group wrap="nowrap" align="flex-start">
         <ThemeIcon size={34} variant="default" radius="md">
@@ -83,7 +83,7 @@ const Header = () => {
         </div>
       </Group>
     </UnstyledButton>
-  ));
+  ))
 
   return (
     <Box pb={50}>
@@ -198,7 +198,7 @@ const Header = () => {
         </ScrollArea>
       </Drawer>
     </Box>
-  );
+  )
 }
 
 export { Header }

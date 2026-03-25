@@ -15,16 +15,26 @@ const CardModal = ({ cardData }) => {
           />
         </Grid.Col>
         <Grid.Col span={3}>
-          <Text fw={500}>Color: {cardData.color}</Text>
-          <Text fw={500}>Size: {cardData.size}</Text>
-          <Badge color="pink">{cardData.price} р.</Badge>
+          <Text fw={500}>
+            Color:
+            {cardData.color}
+          </Text>
+          <Text fw={500}>
+            Size:
+            {cardData.size}
+          </Text>
+          <Badge color="pink">
+            {cardData.price}
+            {' '}
+            р.
+          </Badge>
         </Grid.Col>
       </Grid>
       <Button color="blue" fullWidth mt="md" radius="md">
         Add to Cart
       </Button>
     </Box>
-  );
+  )
 }
 
 export { CardModal }

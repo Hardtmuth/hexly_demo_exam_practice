@@ -1,16 +1,18 @@
-import { Button, Container, Group, Text } from '@mantine/core';
-import { GithubIcon } from '@mantinex/dev-icons';
-import classes from '../styles/HeroTitle.module.css';
+import { Button, Container, Group, Text } from '@mantine/core'
+import { GithubIcon } from '@mantinex/dev-icons'
+import classes from '../styles/HeroTitle.module.css'
 
-export const HeroPage = ()  => {
+export const HeroPage = () => {
   return (
     <div className={classes.wrapper}>
       <Container size={700} className={classes.inner}>
         <h1 className={classes.title}>
-          A{' '}
+          A
+          {' '}
           <Text component="span" variant="gradient" gradient={{ from: 'blue', to: 'cyan' }} inherit>
             fully featured
-          </Text>{' '}
+          </Text>
+          {' '}
           React components and hooks library
         </h1>
 
@@ -42,5 +44,5 @@ export const HeroPage = ()  => {
         </Group>
       </Container>
     </div>
-  );
+  )
 }
