@@ -1,18 +1,20 @@
 import { SimpleGrid, Card, Image, Text, Badge, Button, Group, Pagination, Center, Modal, Box } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
-import { cardsData } from './tempData.js'
+// import { cardsData } from './tempData.js'
 import { CardModal } from './CardModal.jsx'
 
-const RenderCard = (cardData) => {
-  const [opened, { open, close }] = useDisclosure(false)
+import { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchGoods, goodsSelectors } from '../slices/goodsSlice.js'
+
+
+const RenderCard = ({ cardData, onOpenModal} ) => {
   const basePath = new URL('../../img/shoes', import.meta.url).href
   const imgPath = `${basePath}${cardData.photo}`
   // console.log(imgPath)
+
   return (
     <Box key={cardData.id}>
-      <Modal opened={opened} onClose={close} title={`${cardData.brand} ${cardData.model}`}>
-        <CardModal cardData={cardData} />
-      </Modal>
       <Card shadow="sm" padding="lg" radius="md" withBorder onClick={open}>
         <Card.Section>
           <Image
@@ -47,10 +49,39 @@ const RenderCard = (cardData) => {
 }
 
 const CardsGreed = () => {
+  const dispatch = useDispatch()
+  const goods = useSelector(goodsSelectors.selectEntities)
+  const goodsIds = useSelector(goodsSelectors.selectIds)
+  const goodsEntities = useSelector(goodsSelectors.selectEntities)
+  const goodsList = goodsIds.map(id => goodsEntities[id])
+  console.log('goods is: ',goods)
+
+  const [opened, { open, close }] = useDisclosure(false)
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  useEffect(() => {
+    dispatch(fetchGoods())
+  }, [dispatch])
+
+  const handleOpenModal = (cardData) => {
+    setSelectedCard(cardData);
+    open();
+  };
+
   return (
     <>
+      <Modal opened={opened} onClose={close} title={selectedCard ? `${selectedCard.brand} ${selectedCard.model}` : ''}>
+        {selectedCard && <CardModal cardData={selectedCard} />}
+      </Modal>
+
       <SimpleGrid cols={3} spacing="sm" mb="xl">
-        {cardsData.map(RenderCard)}
+        {goodsList.map((cardData) => (
+          <RenderCard
+            key={cardData.id}
+            cardData={cardData}
+            onOpenModal={handleOpenModal}
+          />
+        ))}
       </SimpleGrid>
       <Center>
         <Pagination total={10} />

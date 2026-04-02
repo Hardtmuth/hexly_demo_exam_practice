@@ -17,7 +17,7 @@ const pool = new Pool({
 const getCards = async () => {
   try {
     const view = 'product_cards';
-    const res = await pool.query(`SELECT * FROM ${view} LIMIT 12`)
+    const res = await pool.query(`SELECT * FROM ${view} LIMIT 11`)
     console.log('Данные из представления product_cards:', res.rows)
     return res.rows
   }
